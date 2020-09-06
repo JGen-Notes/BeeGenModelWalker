@@ -7,14 +7,22 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="Bee Gen Model Walker">
-         <property
-               name="applicationCSS"
-               value="platform:/plugin/eu.jgen.beegen.model.walker/css/default.css">
-         </property>
+            name="Walker">
          <property
                name="appName"
-               value="Bee Gen Model Walker">
+               value="Walker">
+         </property>
+         <property
+               name="aboutImage"
+               value="icons/walkaround.gif">
+         </property>
+         <property
+               name="aboutText"
+               value="This  application helps you navigate and understand structure of the metadata imported from the CA Gen Model.">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/walkaround.gif">
          </property>
       </product>
    </extension>

@@ -41,6 +41,7 @@ import eu.jgen.beegen.model.meta.PrpMetaType;
 public class WalkencyLabelProvider extends LabelProvider {
 	
 	private JGenContainer genContainer;
+	private JGenModel genModel;
 	private Meta meta;
 
 	private static final String MARKER_MANY = " [*]";
@@ -49,15 +50,18 @@ public class WalkencyLabelProvider extends LabelProvider {
 	private final Image BACKWARD = getImage("backward.gif");
 	
 
-	public WalkencyLabelProvider(JGenModel genModel) {
-		this.genContainer = genModel.getContainer();
-		this.meta = genContainer.meta;
+	public WalkencyLabelProvider() {
 	}
 
 	@Override
 	public String getText(Object element) {
 		if (element instanceof JGenObject) {
 			JGenObject object = (JGenObject) element;
+			if (genModel == null ) {
+				this.genModel = object.genModel;
+	 			this.genContainer = genModel.getContainer();
+	 			this.meta = genContainer.meta;
+			}
 			return object.getObjMetaType().name() + " " + genObjectNameIfAny(object);
 		} else if (element instanceof AssociationNodeOne) {
 			AssociationNodeOne associationNodeOne = (AssociationNodeOne) element;
@@ -65,8 +69,10 @@ public class WalkencyLabelProvider extends LabelProvider {
 		} else if (element instanceof AssociationNodeMany) {
 			AssociationNodeMany associationNodeMany = (AssociationNodeMany) element;
 			return associationNodeMany.getAscMetaType()+ MARKER_MANY;
+		} else if (element instanceof JGenModel) {
+			return genModel.getName();
 		}
-		return super.getText(element);
+		return super.getText(element) + "hello";
 	}
 
 	private String genObjectNameIfAny(JGenObject genObject) {

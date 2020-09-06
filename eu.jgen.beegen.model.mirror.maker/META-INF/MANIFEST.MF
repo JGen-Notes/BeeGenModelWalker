@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mirror
+Bundle-SymbolicName: eu.jgen.gen.ab.mirror
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: eu.jgen.beegen.model.mirror.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ eu.jgen.beegen.model.api;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: eu.jgen.beegen.model.mirror,
+ eu.jgen.beegen.model.mirror.decaration,
+ eu.jgen.beegen.model.mirror.declaration.annotated,
+ eu.jgen.beegen.model.mirror.tests,
+ eu.jgen.beegen.model.mirror.visitor,
+ eu.jgen.beegen.model.mirror.worker

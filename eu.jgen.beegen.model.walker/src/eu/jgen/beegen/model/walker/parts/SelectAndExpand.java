@@ -32,7 +32,9 @@ import javax.inject.Inject;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.e4.ui.workbench.modeling.ISelectionListener;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -83,6 +85,7 @@ public class SelectAndExpand {
 	}
 
 	private static final String EMPTY_STRING = "";
+	private JGenContainer genContainer;
 	private JGenModel genModel;
 	private Text textObjectId;
 	private Text textName;
@@ -98,25 +101,11 @@ public class SelectAndExpand {
 	@Inject
 	public SelectAndExpand() {
 	}
-	
-	private void findAndOpenModel(Composite parent) {		
-		JGenContainer genContainer = new JGenContainer();
-		genModel = genContainer.connect("/Users/marek/beegen01.ief/bee/BEEGEN01.db");
-		if (genModel == null) {
-			logger.severe("Connection to the Bee Gen Model cannot be completed.");
-			MessageDialog.openConfirm(parent.getShell(), "Connect Error",
-					"Check logs for the possible reasons.");
-			return;
-		}
-		logger.info("Connecting to the Bee Gen Model: " + genModel.getName());		
-	}
 
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		
-		findAndOpenModel(parent);
-		
-		parent.getShell().setText(parent.getShell().getText() + ": " + genModel.getName());
+		parent.getShell().setText(parent.getShell().getText() + ": Find and open your Bee Gen Model") ; 
 		parent.setLayout(new GridLayout(1, false));
 
 		Composite composite = new Composite(parent, SWT.BORDER);
@@ -220,12 +209,11 @@ public class SelectAndExpand {
 		compositeExpantionTree.setLayout(new TreeColumnLayout());
 
 		treeViewer = new TreeViewer(compositeExpantionTree, SWT.BORDER);
-		treeViewer.setContentProvider(new WalkencyContentProvider(genModel));
-		treeViewer.setLabelProvider(new WalkencyLabelProvider(genModel));
+		treeViewer.setContentProvider(new WalkencyContentProvider());
+		treeViewer.setLabelProvider(new WalkencyLabelProvider());
 		Tree tree = treeViewer.getTree();
 		tree.setHeaderVisible(false);
 		tree.setLinesVisible(true);
-		treeViewer.setInput(genModel);
 
 		getAppliactionArgs();
 
@@ -253,6 +241,24 @@ public class SelectAndExpand {
 					comboObjectType.setText(objTypeCode.name());
 					textObjectId.setText(Long.toString(genObject.getId()));
 					textName.setText(getObjectNameIfAny(genObject));
+				}
+			}
+		});
+		
+		btnSearchByType.setVisible(false);
+		btnSearchById.setVisible(false);
+		btnSearchByName.setVisible(false);
+		
+		selectionService.addSelectionListener(new ISelectionListener() {
+			@Override
+			public void selectionChanged(MPart part, Object object) {
+				if (object instanceof JGenContainer) {
+					genContainer = (JGenContainer) object;
+					genModel = genContainer.getModel();
+					treeViewer.setInput(genModel);
+					btnSearchByType.setVisible(true);
+					btnSearchById.setVisible(true);
+					btnSearchByName.setVisible(true);
 				}
 			}
 		});
@@ -287,6 +293,7 @@ public class SelectAndExpand {
 
 	@Focus
 	public void onFocus() {
+		
 		if (comboObjectType != null) {
 			comboObjectType.setFocus();
 		}

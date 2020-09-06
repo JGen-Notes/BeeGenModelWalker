@@ -43,10 +43,7 @@ public class WalkencyContentProvider implements IStructuredContentProvider, ITre
 	private JGenContainer genContainer;
 	private Meta meta;
 
-	public WalkencyContentProvider(JGenModel genModel) {
-		this.genModel = genModel;
-		this.genContainer = genModel.getContainer();
-		this.meta = genContainer.meta;
+	public WalkencyContentProvider() {
 	}
 
 	@Override
@@ -54,6 +51,11 @@ public class WalkencyContentProvider implements IStructuredContentProvider, ITre
 		if (parentElement instanceof JGenModel) {
 			return new Object[] { genModel };
 		} else if (parentElement instanceof JGenObject) {
+			if (genModel  == null) {
+				this.genModel = ((JGenObject) parentElement).genModel;
+				this.genContainer = genModel.getContainer();
+				this.meta = genContainer.meta;
+			}
 			return findAssociations((JGenObject) parentElement);
 		} else if (parentElement instanceof AssociationNodeOne) {
 			AssociationNodeOne associationNodeOne = (AssociationNodeOne) parentElement;
@@ -80,7 +82,10 @@ public class WalkencyContentProvider implements IStructuredContentProvider, ITre
 	@Override
 	public Object[] getElements(Object inputElement) {
 		if (inputElement instanceof JGenModel) {
-			return new Object[] { genModel.findTypeObjects(ObjMetaType.PCROOT).toArray()};
+			this.genModel = (JGenModel) inputElement;
+			this.genContainer = genModel.getContainer();
+			this.meta = genContainer.meta;
+			return  genModel.findTypeObjects(ObjMetaType.PCROOT).toArray();
 		} else if (inputElement instanceof ObjMetaType) {
 			return genModel.findTypeObjects((ObjMetaType) inputElement).toArray();
 		} else if (inputElement instanceof JGenObject) {
