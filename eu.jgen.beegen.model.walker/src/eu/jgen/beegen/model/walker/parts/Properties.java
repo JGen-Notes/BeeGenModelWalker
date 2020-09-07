@@ -94,10 +94,10 @@ public class Properties {
 
 	private static final String INDENT = "     ";
 
-	private final Image OBJECT = getImage("object.gif");
+	private final Image OBJECT = getImage("objectattr.gif");
 	private final Image FORWARD = getImage("forward.gif");
 	private final Image BACKWARD = getImage("backward.gif");
-	private final Image PROPERTY = getImage("variable.gif");
+	private final Image PROPERTY = getImage("property.gif");
 
 	class Row {
 
@@ -154,6 +154,7 @@ public class Properties {
 		Composite composite = new Composite(parent, SWT.BORDER);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite.setLayout(new GridLayout(1, false));
+		
 
 		Group grpPropertiesOfThe = new Group(composite, SWT.NONE);
 		grpPropertiesOfThe.setToolTipText(
@@ -164,7 +165,7 @@ public class Properties {
 		grpPropertiesOfThe.setLayoutData(gd_grpPropertiesOfThe);
 		grpPropertiesOfThe.setText("Details and Properties of the selected object");
 		grpPropertiesOfThe.setLayout(new FillLayout(SWT.HORIZONTAL));
-
+		 
 		Composite compositeScroll = new Composite(grpPropertiesOfThe, SWT.BORDER);
 		compositeScroll.setLayout(new FillLayout(SWT.HORIZONTAL));
 

@@ -21,36 +21,43 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package eu.jgen.beegen.model.mirror.decaration;
+package eu.jgen.beegen.model.mirror.worker;
 
-import java.util.ArrayList;
-
+import eu.jgen.beegen.model.api.JGenObject;
+import eu.jgen.beegen.model.mirror.decaration.Node;
 import eu.jgen.beegen.model.mirror.visitor.Visitor;
 
-public class SimpleView extends Node {
-
-	private static final long serialVersionUID = 1L;
-
-	private ArrayList<AttributeView> attributes;
-
-	public SimpleView() {
-		super();
-	}
-
-	public SimpleView(ArrayList<AttributeView> attributes) {
-		super();
-		this.attributes = attributes;
-	}
-
-	public ArrayList<AttributeView> getAttribute() {
-		if (attributes == null) {
-			attributes = new ArrayList<AttributeView>();
-		}
-		return attributes;
-	}
+public class GenericTextFormater extends Visitor  {
 	
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
-	}
+	  /** The current indentation */
+	  private int curIndent = 0;
+	  
+	  public void indent(int value) {
+		  curIndent = curIndent + value * 3;
+	  }
 
+	  public void outdent(int value) {
+		  curIndent = curIndent - value * 3;
+	  }
+	  
+	  public String space() {
+		  return "                                                                                                                     ".substring(0,curIndent);
+	  }
+	  
+	  public void out(String text) {
+		  System.out.println( space() + text);
+	  }
+	  
+	  public void out(Object object) {
+		  System.out.println( space() + describe(object));
+	  }
+	  
+	  private String describe(Object object) {
+		  if (object instanceof Node) {
+			  Node node = (Node) object;
+			  JGenObject genObject = node.getGenObject();
+			  return node.getType() + ": " +genObject.toString();
+		  }
+		  return "";		  
+	  }
 }

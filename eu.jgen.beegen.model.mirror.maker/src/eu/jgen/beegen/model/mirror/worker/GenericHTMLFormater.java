@@ -24,9 +24,22 @@
 package eu.jgen.beegen.model.mirror.worker;
 
 import eu.jgen.beegen.model.api.JGenObject;
+import eu.jgen.beegen.model.mirror.decaration.Node;
 import eu.jgen.beegen.model.mirror.visitor.Visitor;
 
-public class GenericFormater extends Visitor  {
+public class GenericHTMLFormater extends Visitor  {
+	
+	StringBuffer buffer = new StringBuffer();
+	
+	public GenericHTMLFormater(String baseref) {
+		super();
+		buffer.append("<!DOCTYPE html>");
+		buffer.append("<html>");
+		buffer.append("<head>");
+		buffer.append("<base href=\"" + baseref + "\" target=\"_blank\">");
+		buffer.append("</head>");
+		buffer.append("<body>");
+	}
 	
 	  /** The current indentation */
 	  private int curIndent = 0;
@@ -39,24 +52,29 @@ public class GenericFormater extends Visitor  {
 		  curIndent = curIndent - value * 3;
 	  }
 	  
-	  public String space() {
-		  return "                                                                                                                     ".substring(0,curIndent);
-	  }
-	  
-	  public void out(String text) {
-		  System.out.println( space() + text);
-	  }
-	  
 	  public void out(Object object) {
-		  System.out.println( space() + describe(object));
+		  buffer.append(describe(object));
 	  }
 	  
 	  private String describe(Object object) {
-		  if (object instanceof JGenObject) {
-			  JGenObject genObject = (JGenObject) object;
-			  return "[" + genObject.objId + "," + genObject.objMnemonic + "," + genObject.objType + "," + genObject.name + "]";
+		  if (object instanceof Node) {
+			  Node node = (Node) object;
+			  JGenObject genObject = node.getGenObject();
+			  String name = "";
+			  if (genObject.name.length() > 0)  {
+				  name = ", <b>name</b>=" + genObject.name;
+			  }			  
+			  return "<div style=\"margin-left: " + (10 * curIndent)  +"px; color:Gray;\">" + "<img src=\"icons/object.gif\"> <b style=\"color:FireBrick;\">" + node.getType().toString().replace('_', ' ').toLowerCase() + "</b> - [" +"<b>id</b>=" + genObject.objId + ", <b>objType</b>=" + genObject.objType + ", <b>mnemonic</b>=" + genObject.objMnemonic + name + "]" +"</div>";
+		  } else if (object instanceof String) {
+			  String text = (String) object;
+			  return "<div style=\"margin-left: " + (10 * curIndent)  +"px; color:DodgerBlue;\"><b style=\"color:Black;\">" + text + "</b>"  +"</div>";
 		  }
-		  return "";
-		  
+		  return "";		  
+	  }
+	  
+	  public String toString() {
+		  buffer.append("</body>");
+		  buffer.append("</html>");
+		  return buffer.toString();
 	  }
 }

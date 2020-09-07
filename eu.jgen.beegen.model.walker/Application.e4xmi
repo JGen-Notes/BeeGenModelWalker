@@ -3,12 +3,12 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="eu.jgen.notes.walkency.window.main" selectedElement="_6wlLkMgZEeSyMNYR5xypkQ" label="Bee Gen Model Walker" iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/walkaround.gif" tooltip="This application allows you to navigate thru the Bee Gen Model." width="1200" height="1000">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.ide.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="eu.jgen.notes.walkency.perspective.sample" selectedElement="_cfoB0JuOEeaLZIjjzmHETw">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_cfoB0JuOEeaLZIjjzmHETw" elementId="eu.jgen.notes.walkency.partsashcontainer.0">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_cfoB0JuOEeaLZIjjzmHETw" elementId="eu.jgen.notes.walkency.partsashcontainer.0" selectedElement="_W8gGgJnYEeamJbJ31izyow">
           <children xsi:type="advanced:Area" xmi:id="_W8gGgJnYEeamJbJ31izyow" elementId="eu.jgen.notes.walkency.area.0" horizontal="true">
-            <children xsi:type="basic:Part" xmi:id="_dcbXUJnYEeamJbJ31izyow" elementId="eu.jgen.notes.walkency.part.0" contributionURI="bundleclass://eu.jgen.beegen.model.walker/eu.jgen.beegen.model.walker.parts.SelectAndExpand" iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/walkaround.gif"/>
-            <children xsi:type="basic:Part" xmi:id="_eFneQJnYEeamJbJ31izyow" elementId="eu.jgen.notes.walkency.part.1" contributionURI="bundleclass://eu.jgen.beegen.model.walker/eu.jgen.beegen.model.walker.parts.Properties"/>
+            <children xsi:type="basic:Part" xmi:id="_dcbXUJnYEeamJbJ31izyow" elementId="eu.jgen.notes.walkency.part.objectselection" contributionURI="bundleclass://eu.jgen.beegen.model.walker/eu.jgen.beegen.model.walker.parts.SelectAndExpand" label="Object Sel;ection" iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/expand.gif"/>
+            <children xsi:type="basic:Part" xmi:id="_eFneQJnYEeamJbJ31izyow" elementId="eu.jgen.notes.walkency.part.properties" contributionURI="bundleclass://eu.jgen.beegen.model.walker/eu.jgen.beegen.model.walker.parts.Properties" label="Properties" iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/properties.gif"/>
           </children>
-          <children xsi:type="basic:Part" xmi:id="_SBDMYO8_EeqZx9s1QC8Zug" elementId="eu.jgen.beegen.model.walker.part.0" contributionURI="bundleclass://eu.jgen.beegen.model.walker/eu.jgen.beegen.model.walker.parts.GenObjectMirroring"/>
+          <children xsi:type="basic:Part" xmi:id="_SBDMYO8_EeqZx9s1QC8Zug" elementId="eu.jgen.beegen.model.walker.part.actionblockexpansionreport" contributionURI="bundleclass://eu.jgen.beegen.model.walker/eu.jgen.beegen.model.walker.parts.GenObjectMirroring" label="Action Block Expansion Report" iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/report_obj.gif"/>
         </children>
       </children>
     </children>
@@ -20,12 +20,12 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_M21WwJuIEeaLZIjjzmHETw" elementId="about" label="About" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_DhFQQO3pEeq22YJJZNo5rA" elementId="eu.jgen.beegen.model.walker.menu.file" label="File">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_FPRQYO3pEeq22YJJZNo5rA" elementId="eu.jgen.beegen.model.walker.handledmenuitem.open" label="Open" iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/walkaround.gif" command="_5wCe4O3mEeq22YJJZNo5rA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_FPRQYO3pEeq22YJJZNo5rA" elementId="eu.jgen.beegen.model.walker.handledmenuitem.open" label="Open Model..." iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/folder.gif" command="_5wCe4O3mEeq22YJJZNo5rA"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ" elementId="eu.jgen.notes.walkency.trimbar.top">
       <children xsi:type="menu:ToolBar" xmi:id="_fe9wEO3sEeq22YJJZNo5rA" elementId="eu.jgen.beegen.model.walker.toolbar.0">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_hRO-8O3sEeq22YJJZNo5rA" elementId="eu.jgen.beegen.model.walker.handledtoolitem.0" iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/walkaround.gif" command="_5wCe4O3mEeq22YJJZNo5rA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_hRO-8O3sEeq22YJJZNo5rA" elementId="eu.jgen.beegen.model.walker.handledtoolitem.openmodel" label="Open Model" iconURI="platform:/plugin/eu.jgen.beegen.model.walker/icons/folder.gif" tooltip="Open Bee Gen Model" command="_5wCe4O3mEeq22YJJZNo5rA"/>
       </children>
     </trimBars>
   </children>

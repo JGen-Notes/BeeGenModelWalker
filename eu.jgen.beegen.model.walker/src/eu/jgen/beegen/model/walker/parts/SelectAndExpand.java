@@ -44,6 +44,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
@@ -52,6 +54,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -104,6 +107,22 @@ public class SelectAndExpand {
 
 	@PostConstruct
 	public void postConstruct(Composite parent) {
+		
+		parent.addControlListener(new ControlListener() {
+
+			@Override
+			public void controlMoved(ControlEvent arg0) {
+			
+				
+			}
+
+			@Override
+			public void controlResized(ControlEvent arg0) {
+			
+			}
+			
+			
+		});
 		
 		parent.getShell().setText(parent.getShell().getText() + ": Find and open your Bee Gen Model") ; 
 		parent.setLayout(new GridLayout(1, false));
@@ -303,4 +322,8 @@ public class SelectAndExpand {
 		String name = genObject.findTextProperty(PrpMetaType.NAME);
 		return name.length() > 0 ? name : "";
 	}
+	
+	
+	
+	
 }

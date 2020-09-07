@@ -21,9 +21,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package eu.jgen.beegen.model.mirror.tests;
+package eu.jgen.beegen.model.mirror.worker;
 
-import eu.jgen.beegen.model.meta.PrpMetaType;
 import eu.jgen.beegen.model.mirror.decaration.AttributeView;
 import eu.jgen.beegen.model.mirror.decaration.Clause;
 import eu.jgen.beegen.model.mirror.decaration.EntityActions;
@@ -40,12 +39,12 @@ import eu.jgen.beegen.model.mirror.decaration.ViewsDeclaration;
 import eu.jgen.beegen.model.mirror.declaration.annotated.IActionBlock;
 import eu.jgen.beegen.model.mirror.declaration.annotated.IActionBlockBody;
 
-public class TreeDumper2 extends BasicFormater {
+public class TreeHTMDumper extends GenericHTMLFormater {
 
 	@Override
 	public void visit(ViewsDeclaration viewsDeclaration) {
 		indent(1);
-		out(viewsDeclaration.toString());
+		out(viewsDeclaration);
 		super.visit(viewsDeclaration);
 		outdent(1);
 	}
@@ -53,21 +52,21 @@ public class TreeDumper2 extends BasicFormater {
 	@Override
 	public void visit(MainDeclaration mainDeclaration) {
 		indent(1);
-		out(mainDeclaration.toString());
+		out(mainDeclaration);
 		super.visit(mainDeclaration);
 		outdent(1);
 	}
 
 	@Override
 	public void visit(EventDeclaration eventDeclaration) {
-		out(eventDeclaration.toString());
+		out(eventDeclaration);
 		super.visit(eventDeclaration);
 	}
 
 	@Override
 	public void visit(AttributeView attribute) {
 		indent(1);
-		out(attribute.toString());
+		out(attribute);
 		super.visit(attribute);
 		outdent(1);
 	}
@@ -75,7 +74,7 @@ public class TreeDumper2 extends BasicFormater {
 	@Override
 	public void visit(SimpleView simpleView) {
 		indent(1);
-		out(simpleView.toString());
+		out(simpleView);
 		super.visit(simpleView);
 		outdent(1);
 	}
@@ -83,7 +82,8 @@ public class TreeDumper2 extends BasicFormater {
 	@Override
 	public void visit(GroupView groupView) {
 		indent(1);
-		System.out.println(space() + groupView);
+		out(groupView);
+		//System.out.println(space() + groupView);
 		super.visit(groupView);
 		outdent(1);
 	}
@@ -91,7 +91,7 @@ public class TreeDumper2 extends BasicFormater {
 	@Override
 	public void visit(ImportViews importViews) {
 		indent(1);
-		out(importViews.toString());
+		out(importViews);
 		super.visit(importViews);
 		outdent(1);
 	}
@@ -99,7 +99,7 @@ public class TreeDumper2 extends BasicFormater {
 	@Override
 	public void visit(ExportViews exportViews) {
 		indent(1);
-		out(exportViews.toString());
+		out(exportViews);
 		super.visit(exportViews);
 		outdent(1);
 	}
@@ -107,7 +107,7 @@ public class TreeDumper2 extends BasicFormater {
 	@Override
 	public void visit(LocalViews localViews) {
 		indent(1);
-		out(localViews.toString());
+		out(localViews);
 		super.visit(localViews);
 		outdent(1);
 	}
@@ -115,14 +115,14 @@ public class TreeDumper2 extends BasicFormater {
 	@Override
 	public void visit(EntityActions entityActions) {
 		indent(1);
-		out(entityActions.toString());
+		out(entityActions);
 		super.visit(entityActions);
 		outdent(1);
 	}
 
 	@Override
 	public void visit(IActionBlock actionBlock) {
-		out(actionBlock.toString());
+		out(actionBlock);
 		super.visit(actionBlock);
 	}
 
@@ -147,23 +147,19 @@ public class TreeDumper2 extends BasicFormater {
 	@Override
 	public void visit(Statement statement) {
 		indent(1);
-		String prefix = " ";
-		if (statement.getGenObject().findCharacterProperty(PrpMetaType.COMNTD) == 'Y') {
-			prefix = "*";
-		}
-		out(prefix + statement.toString());
+ 		out(statement);
 		super.visit(statement);
 		outdent(1);
 	}
 
-	public TreeDumper2() {
-
+	public TreeHTMDumper(String baseref) {
+		super(baseref);
 	}
 
 	@Override
 	public void visit(Clause clause) {
 		indent(1);
-		out(clause.toString());
+		out(clause);
 		super.visit(clause);
 		outdent(1);
 	}

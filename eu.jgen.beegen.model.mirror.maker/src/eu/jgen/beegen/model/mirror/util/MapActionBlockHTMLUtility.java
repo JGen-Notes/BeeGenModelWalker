@@ -21,10 +21,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  */
-package eu.jgen.beegen.model.mirror.tests;
+package eu.jgen.beegen.model.mirror.util;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import org.eclipse.swt.internal.cocoa.OS;
 
 import eu.jgen.beegen.model.api.JGenContainer;
 import eu.jgen.beegen.model.api.JGenModel;
@@ -33,18 +37,23 @@ import eu.jgen.beegen.model.meta.ObjMetaType;
 import eu.jgen.beegen.model.meta.PrpMetaType;
 import eu.jgen.beegen.model.mirror.decaration.ActionBlock;
 import eu.jgen.beegen.model.mirror.worker.BeeGenModelMirrorCreator;
-import eu.jgen.beegen.model.mirror.worker.TreeTextDumper;
+import eu.jgen.beegen.model.mirror.worker.TreeHTMDumper;
 
-public class MapActionBlock {
+public class MapActionBlockHTMLUtility {
 
 	private JGenContainer genContainer;
 
 	private JGenModel genModel;
+	
+	private String pathReportsDirectory;
+	
+	private String baseref = "file:///Users/Marek/git/BeeGenModelWalker/eu.jgen.beegen.model.walker/";
 
 	public static void main(String[] args) {
 
-		MapActionBlock map = new MapActionBlock();
+		MapActionBlockHTMLUtility map = new MapActionBlockHTMLUtility();
 		try {
+			System.out.println("Mapping Action Block as HTML, Version 0.2");
 			System.out.println("Starting...");
 			map.start(args[0], args[1]);
 			System.out.println("Finished.");
@@ -58,8 +67,10 @@ public class MapActionBlock {
 		
 		genContainer = new JGenContainer();
 		genModel = genContainer.connect(modelPath);
-				
-;
+		String nativeDir = genContainer.getModelLocation().substring(0, genContainer.getModelLocation().lastIndexOf(File.separator));
+		pathReportsDirectory = nativeDir + "/reports";
+		System.out.println(nativeDir);
+		createReportsFolder();		
 		List<JGenObject> list  = genModel.findNamedObjects(ObjMetaType.ACBLKBSD, PrpMetaType.NAME,
 				actionBlockName);
 		JGenObject acblkbsd = list.get(0);
@@ -67,22 +78,34 @@ public class MapActionBlock {
 	}
 
 	private void transform(JGenObject acblk) throws FileNotFoundException {
-		String name = acblk.findTextProperty(PrpMetaType.NAME);
 		BeeGenModelMirrorCreator actionBlockMapping = new BeeGenModelMirrorCreator();
 		ActionBlock actionBlock = actionBlockMapping
 				.transformActionBlock(acblk);
-	//	actionBlock.accept(new BasicFormater());
 		if (actionBlock != null) {
-			generateSourceCode(actionBlock);
+			TreeHTMDumper dumper = new TreeHTMDumper(baseref); 
+			actionBlock.accept(dumper);
+			System.out.println(dumper);
+			createReportFile(String.valueOf(acblk.objId), dumper.toString());
 		}
 	}
-
-	private void generateSourceCode(ActionBlock actionBlock)
-			throws FileNotFoundException {
-		TreeTextDumper treeDumper = new TreeTextDumper();
-		actionBlock.accept(new BasicFormater());
-	 	actionBlock.accept(treeDumper);
-
+	
+	private void createReportsFolder() {
+		File dir = new File(pathReportsDirectory);
+		if (dir.exists() &&dir.isDirectory()) {
+			return;
+		}
+		dir.mkdirs();
+	}
+	
+	private void createReportFile(String name, String contents) {
+		try {
+			PrintWriter out = new PrintWriter(pathReportsDirectory + "/" + name + ".html");
+			out.print(contents); 
+			out.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Problem persisting generated HTML in the file.");
+			e.printStackTrace();
+		}
 	}
 
 }

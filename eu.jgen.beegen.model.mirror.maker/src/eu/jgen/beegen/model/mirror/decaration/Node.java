@@ -25,6 +25,7 @@ package eu.jgen.beegen.model.mirror.decaration;
 
 
 import eu.jgen.beegen.model.api.JGenObject;
+import eu.jgen.beegen.model.meta.AscMetaType;
 import eu.jgen.beegen.model.mirror.visitor.Visitor;
 
 
@@ -38,6 +39,16 @@ public class Node implements INode {
 	
 	private AggregateObjectType type;
 	
+	private AscMetaType ascMetaType;
+	
+	public AscMetaType getAscMetaType() {
+		return ascMetaType;
+	}
+
+	public void setAscMetaType(AscMetaType ascMetaType) {
+		this.ascMetaType = ascMetaType;
+	}
+
 	public void setType(AggregateObjectType type) {
 		this.type = type;
 	}
@@ -74,12 +85,4 @@ public class Node implements INode {
 		return getType() + " : " + genObject.toString();
 	}
 	
-//	public String toString() {
-//		return "<p style=\"margin-left: 40px\">This text is indented.</p>";
-//	}
-	
-	//String a =  "/Users/Marek/git/BeeGenModelWalker/eu.jgen.beegen.model.walker/icons/object.gif";
-	//return "[" + this.objId + ", objType=" + this.objType + ", mnemonic=" + this.objMnemonic + name + "]" ;
-	//return "<p style=\"margin-left: 80px; color:DodgerBlue;\">" + "<img src=\"/Users/Marek/git/BeeGenModelWalker/eu.jgen.beegen.model.walker/icons/object.gif\">" + "[" +"<b>id</b>=" + this.objId + ", <b>objType</b>=" + this.objType + ", <b>mnemonic</b>=" + this.objMnemonic + name + "]" +"</p>";
-
 }

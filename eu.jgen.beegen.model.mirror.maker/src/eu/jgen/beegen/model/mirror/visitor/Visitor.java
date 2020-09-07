@@ -26,7 +26,7 @@ package eu.jgen.beegen.model.mirror.visitor;
 import java.util.ArrayList;
 
 import eu.jgen.beegen.model.mirror.decaration.ActionBlockBody;
-import eu.jgen.beegen.model.mirror.decaration.Attribute;
+import eu.jgen.beegen.model.mirror.decaration.AttributeView;
 import eu.jgen.beegen.model.mirror.decaration.Clause;
 import eu.jgen.beegen.model.mirror.decaration.EntityActions;
 import eu.jgen.beegen.model.mirror.decaration.EventDeclaration;
@@ -96,22 +96,22 @@ public class Visitor {
 	}
 
 	public void visit(Statement statement) {
-		StatementsGroup statementsGroup = statement.getStatementsGroup();
-		if (statementsGroup != null) {
-			statementsGroup.accept(this);
-		}
+//		StatementsGroup statementsGroup = statement.getStatementsGroup();
+//		if (statementsGroup != null) {
+//			statementsGroup.accept(this);
+//		}
 		ArrayList<Clause> clauses = statement.getClauses();
 		for (Clause clause : clauses) {
 			clause.accept(this);
 		}
 	}
 
-	public void visit(Attribute attribute) {
+	public void visit(AttributeView attribute) {
 	}
 
 	public void visit(SimpleView simpleView) {
-		ArrayList<Attribute> attributes = simpleView.getAttribute();
-		for (Attribute attribute : attributes) {
+		ArrayList<AttributeView> attributes = simpleView.getAttribute();
+		for (AttributeView attribute : attributes) {
 			attribute.accept(this);
 		}
 	}

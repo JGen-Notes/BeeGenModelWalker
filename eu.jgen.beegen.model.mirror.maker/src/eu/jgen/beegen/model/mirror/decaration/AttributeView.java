@@ -25,11 +25,11 @@ package eu.jgen.beegen.model.mirror.decaration;
 
 import eu.jgen.beegen.model.mirror.visitor.Visitor;
 
-public class Attribute extends Node   {
+public class AttributeView extends Node   {
 
 	private static final long serialVersionUID = 1L;
 	
-	public Attribute() {
+	public AttributeView() {
 		super();
 	}
 

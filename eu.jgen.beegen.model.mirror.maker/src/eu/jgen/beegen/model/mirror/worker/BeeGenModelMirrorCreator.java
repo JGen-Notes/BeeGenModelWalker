@@ -31,7 +31,7 @@ import eu.jgen.beegen.model.meta.ObjMetaType;
 import eu.jgen.beegen.model.meta.PrpMetaType;
 import eu.jgen.beegen.model.mirror.decaration.ActionBlock;
 import eu.jgen.beegen.model.mirror.decaration.ActionBlockBody;
-import eu.jgen.beegen.model.mirror.decaration.Attribute;
+import eu.jgen.beegen.model.mirror.decaration.AttributeView;
 import eu.jgen.beegen.model.mirror.decaration.Clause;
 import eu.jgen.beegen.model.mirror.decaration.EntityActions;
 import eu.jgen.beegen.model.mirror.decaration.EventDeclaration;
@@ -174,10 +174,10 @@ public class BeeGenModelMirrorCreator {
 	/**
 	 * Method creates a new node representing attribute declaration.
 	 */
-	private void createAttribute(SimpleView simpleView, JGenObject prdvw) {
-		Attribute attribute = new Attribute();
+	private void createAttributeView(SimpleView simpleView, JGenObject prdvw) {  
+		AttributeView attribute = new AttributeView();
 		attribute.setGenObject(prdvw);
-		attribute.setType(AggregateObjectType.ATTRIBUTE);
+		attribute.setType(AggregateObjectType.ATTRIBUTE_VIEW);
 		attribute.setParent(simpleView);
 		simpleView.getAttribute().add(attribute);
 		return;
@@ -216,14 +216,14 @@ public class BeeGenModelMirrorCreator {
 		int j = 0;
 		for (int i = 0; i < prdvw.size(); i++) {
 			if (prdvw.get(i).getObjMetaType() == ObjMetaType.PRDVW) {
-				createAttribute(simpleView, (JGenObject) prdvw.get(i));
+				createAttributeView(simpleView, (JGenObject) prdvw.get(i));
 				j = i + 1;
 				break;
 			}
 		}
 		for (int i = j; i < prdvw.size(); i++) {
 			if (prdvw.get(i).getObjMetaType() == ObjMetaType.PRDVW) {
-				createAttribute(simpleView, (JGenObject) prdvw.get(i));
+				createAttributeView(simpleView, (JGenObject) prdvw.get(i));
 			}
 		}
 		return simpleView;

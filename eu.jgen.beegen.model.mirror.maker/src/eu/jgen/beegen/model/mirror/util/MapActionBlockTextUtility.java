@@ -33,10 +33,10 @@ import eu.jgen.beegen.model.meta.ObjMetaType;
 import eu.jgen.beegen.model.meta.PrpMetaType;
 import eu.jgen.beegen.model.mirror.decaration.ActionBlock;
 import eu.jgen.beegen.model.mirror.worker.BeeGenModelMirrorCreator;
-import eu.jgen.beegen.model.mirror.worker.GenericFormater;
-import eu.jgen.beegen.model.mirror.worker.TreeDumper;
+import eu.jgen.beegen.model.mirror.worker.GenericTextFormater;
+import eu.jgen.beegen.model.mirror.worker.TreeTextDumper;
 
-public class MapActionBlockUtility {
+public class MapActionBlockTextUtility {
 
 	private JGenContainer genContainer;
 
@@ -44,8 +44,9 @@ public class MapActionBlockUtility {
 
 	public static void main(String[] args) {
 
-		MapActionBlockUtility map = new MapActionBlockUtility();
+		MapActionBlockTextUtility map = new MapActionBlockTextUtility();
 		try {
+			System.out.println("Mapping Action Block as Text, Version 0.2");
 			System.out.println("Starting...");
 			map.start(args[0], args[1]);
 			System.out.println("Finished.");
@@ -68,21 +69,12 @@ public class MapActionBlockUtility {
 	}
 
 	private void transform(JGenObject acblk) throws FileNotFoundException {
-		String name = acblk.findTextProperty(PrpMetaType.NAME);
 		BeeGenModelMirrorCreator actionBlockMapping = new BeeGenModelMirrorCreator();
 		ActionBlock actionBlock = actionBlockMapping
 				.transformActionBlock(acblk);
 		if (actionBlock != null) {
-			actionBlock.accept( new TreeDumper());
+			actionBlock.accept( new TreeTextDumper());
 		}
 	}
-
-//	private void generateSourceCode(ActionBlock actionBlock)
-//			throws FileNotFoundException {
-//	//	TreeDumper treeDumper = new TreeDumper();
-//	// 	actionBlock.accept(new GenericFormater());
-//	  	actionBlock.accept( new TreeDumper());
-//
-//	}
 
 }
