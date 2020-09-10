@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Walker" uid="BeeGenModelWalker" id="eu.jgen.beegen.model.walker.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
-
-   <aboutInfo>
-      <image path="/eu.jgen.beegen.model.walker/icons/walkaround.gif"/>
-      <text>
-         This  application helps you navigate and understand structure of the metadata imported from the CA Gen Model.
-      </text>
-   </aboutInfo>
+<product name="eu.jgen.beegen.model.walker" id="eu.jgen.beegen.model.walker.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -20,21 +13,9 @@
       </vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/eu.jgen.beegen.model.walker/icons/walkaround.gif"/>
-
-   <splash
-      location="eu.jgen.beegen.model.walker" />
-   <launcher>
-      <win useIco="false">
-         <bmp/>
-      </win>
-   </launcher>
-
-   <vm>
-   </vm>
+   <windowImages/>
 
    <plugins>
-      <plugin id="com.google.guava"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="eu.jgen.beegen.model.api"/>
       <plugin id="eu.jgen.beegen.model.walker"/>
@@ -59,10 +40,7 @@
       <plugin id="org.eclipse.core.databinding.observable"/>
       <plugin id="org.eclipse.core.databinding.property"/>
       <plugin id="org.eclipse.core.expressions"/>
-      <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
-      <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.e4.core.commands"/>
       <plugin id="org.eclipse.e4.core.contexts"/>
@@ -115,9 +93,6 @@
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.urischeme"/>
-      <plugin id="org.eclipse.xtend.lib"/>
-      <plugin id="org.eclipse.xtend.lib.macro"/>
-      <plugin id="org.eclipse.xtext.xbase.lib"/>
       <plugin id="org.hamcrest.core"/>
       <plugin id="org.junit"/>
       <plugin id="org.junit.jupiter.api"/>
@@ -131,12 +106,5 @@
       <plugin id="org.w3c.dom.svg"/>
    </plugins>
 
-
-   <preferencesInfo>
-      <targetfile overwrite="false"/>
-   </preferencesInfo>
-
-   <cssInfo>
-   </cssInfo>
 
 </product>

@@ -104,25 +104,26 @@ public class SelectAndExpand {
 	@Inject
 	public SelectAndExpand() {
 	}
+	
+	private void ex(Composite parent) {
+		System.out.println("========");
+		for (Object object : parent.getChildren()) {
+			System.out.println(object);
+		}
+		if  (parent.getParent() != null) {
+			ex(parent.getParent());
+		}
+	}
 
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		
-		parent.addControlListener(new ControlListener() {
-
-			@Override
-			public void controlMoved(ControlEvent arg0) {
-			
-				
-			}
-
-			@Override
-			public void controlResized(ControlEvent arg0) {
-			
-			}
-			
-			
-		});
+		 
+		
+ 
+		System.out.println(parent.getParent().getClass());
+		System.out.println(parent.getParent().getParent().getClass());
+		System.out.println(parent.getParent().getParent().getParent().getClass());
 		
 		parent.getShell().setText(parent.getShell().getText() + ": Find and open your Bee Gen Model") ; 
 		parent.setLayout(new GridLayout(1, false));
@@ -313,9 +314,7 @@ public class SelectAndExpand {
 	@Focus
 	public void onFocus() {
 		
-		if (comboObjectType != null) {
-			comboObjectType.setFocus();
-		}
+	 
 	}
 
 	private String getObjectNameIfAny(JGenObject genObject) {
