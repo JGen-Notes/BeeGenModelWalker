@@ -43,7 +43,7 @@ public class OpenHandler {
 						"Check logs for the possible reasons.");
 				return;
 			}
-			logger.info("Connecting from hndler to the Bee Gen Model: " + genModel.getName());		
+			logger.info("Connecting from handler to the Bee Gen Model: " + genModel.getName());		
 		}
   
 }

@@ -25,7 +25,6 @@ package eu.jgen.beegen.model.walker.parts;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -35,7 +34,6 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.modeling.ISelectionListener;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -44,8 +42,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
@@ -54,7 +50,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -69,7 +64,6 @@ import eu.jgen.beegen.model.api.JGenObject;
 import eu.jgen.beegen.model.meta.ObjMetaType;
 import eu.jgen.beegen.model.meta.PrpMetaType;
 
-//@SuppressWarnings("restriction")
 public class SelectAndExpand {
 
 	public static class StartingPoint {
@@ -98,36 +92,17 @@ public class SelectAndExpand {
 	@Inject
 	private ESelectionService selectionService;
 
-	//@Inject
-	private Logger logger = Logger.getLogger(this.getClass().getName());
+	// @Inject
+	// private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	@Inject
 	public SelectAndExpand() {
 	}
-	
-	private void ex(Composite parent) {
-		System.out.println("========");
-		for (Object object : parent.getChildren()) {
-			System.out.println(object);
-		}
-		if  (parent.getParent() != null) {
-			ex(parent.getParent());
-		}
-	}
 
 	@PostConstruct
 	public void postConstruct(Composite parent) {
-		
-		 
-		
- 
-		System.out.println(parent.getParent().getClass());
-		System.out.println(parent.getParent().getParent().getClass());
-		System.out.println(parent.getParent().getParent().getParent().getClass());
-		
-		parent.getShell().setText(parent.getShell().getText() + ": Find and open your Bee Gen Model") ; 
-		parent.setLayout(new GridLayout(1, false));
 
+		parent.setLayout(new GridLayout(1, false));
 		Composite composite = new Composite(parent, SWT.BORDER);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite.setLayout(new GridLayout(1, false));
@@ -190,9 +165,9 @@ public class SelectAndExpand {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				int id = Integer.valueOf(textObjectId.getText());
-				JGenObject genObject = genModel.findObjectById(id); 
-				if(genObject != null) {
-					treeViewer.setInput(new StartingPoint(new Object[]{genObject}));
+				JGenObject genObject = genModel.findObjectById(id);
+				if (genObject != null) {
+					treeViewer.setInput(new StartingPoint(new Object[] { genObject }));
 					selectionService.setSelection(genObject);
 					comboObjectType.setText(genObject.getObjMetaType().name());
 				}
@@ -210,10 +185,11 @@ public class SelectAndExpand {
 		btnSearchByName.setText("Search By Name");
 		btnSearchByName.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {	
+			public void widgetSelected(SelectionEvent e) {
 				textObjectId.setText(EMPTY_STRING);
-				List<JGenObject> objects= genModel.findNamedObjects(ObjMetaType.valueOf(comboObjectType.getText()), PrpMetaType.NAME, textName.getText());
-					treeViewer.setInput(new StartingPoint(objects.toArray()));				
+				List<JGenObject> objects = genModel.findNamedObjects(ObjMetaType.valueOf(comboObjectType.getText()),
+						PrpMetaType.NAME, textName.getText());
+				treeViewer.setInput(new StartingPoint(objects.toArray()));
 			}
 		});
 
@@ -264,11 +240,11 @@ public class SelectAndExpand {
 				}
 			}
 		});
-		
+
 		btnSearchByType.setVisible(false);
 		btnSearchById.setVisible(false);
 		btnSearchByName.setVisible(false);
-		
+
 		selectionService.addSelectionListener(new ISelectionListener() {
 			@Override
 			public void selectionChanged(MPart part, Object object) {
@@ -291,8 +267,7 @@ public class SelectAndExpand {
 	protected void updateStartingPoint(Object selectedObject) {
 		if (selectedObject instanceof JGenObject) {
 			JGenObject genObject = (JGenObject) selectedObject;
-			comboObjectType
-					.setText(genObject.getObjMetaType().name());
+			comboObjectType.setText(genObject.getObjMetaType().name());
 			textObjectId.setText(String.valueOf(genObject.getId()));
 		} else if (selectedObject instanceof AssociationNode) {
 			AssociationNode associationNode = (AssociationNode) selectedObject;
@@ -313,16 +288,12 @@ public class SelectAndExpand {
 
 	@Focus
 	public void onFocus() {
-		
-	 
+		comboObjectType.setFocus();
 	}
 
 	private String getObjectNameIfAny(JGenObject genObject) {
 		String name = genObject.findTextProperty(PrpMetaType.NAME);
 		return name.length() > 0 ? name : "";
 	}
-	
-	
-	
-	
+
 }

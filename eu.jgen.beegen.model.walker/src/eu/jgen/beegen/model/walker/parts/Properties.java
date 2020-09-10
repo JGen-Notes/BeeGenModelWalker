@@ -144,7 +144,6 @@ public class Properties {
 
 	@Inject
 	public Properties() {
-
 	}
 
 	@PostConstruct
@@ -152,9 +151,9 @@ public class Properties {
 		parent.setLayout(new GridLayout(1, false));
 
 		Composite composite = new Composite(parent, SWT.BORDER);
+
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite.setLayout(new GridLayout(1, false));
-		
 
 		Group grpPropertiesOfThe = new Group(composite, SWT.NONE);
 		grpPropertiesOfThe.setToolTipText(
@@ -165,7 +164,7 @@ public class Properties {
 		grpPropertiesOfThe.setLayoutData(gd_grpPropertiesOfThe);
 		grpPropertiesOfThe.setText("Details and Properties of the selected object");
 		grpPropertiesOfThe.setLayout(new FillLayout(SWT.HORIZONTAL));
-		 
+
 		Composite compositeScroll = new Composite(grpPropertiesOfThe, SWT.BORDER);
 		compositeScroll.setLayout(new FillLayout(SWT.HORIZONTAL));
 
@@ -224,7 +223,7 @@ public class Properties {
 	}
 
 	@Inject
-	void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) JGenObject genObject) {		
+	void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) JGenObject genObject) {
 		if (genObject != null) {
 			rows.clear();
 			rows.add(new Row(LABEL_OBJECT, "", null));
@@ -239,73 +238,89 @@ public class Properties {
 			tableViewer.setInput(rows);
 		}
 	}
-	
+
 	@Inject
-	void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) AssociationNodeOne associationNodeOne) {			
+	void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) AssociationNodeOne associationNodeOne) {
 		if (associationNodeOne != null) {
 			Meta meta = associationNodeOne.getFromGenObject().genContainer.meta;
 			ObjMetaType objTypeCode = associationNodeOne.getFromGenObject().getObjMetaType();
-			Image image = meta.isAssociationForward(objTypeCode, associationNodeOne.getAscMetaType()) ? FORWARD : BACKWARD;
+			Image image = meta.isAssociationForward(objTypeCode, associationNodeOne.getAscMetaType()) ? FORWARD
+					: BACKWARD;
 			rows.clear();
 			// source
 			rows.add(new Row(LABEL_SOURCE_OBJECT, "", null));
 			rows.add(new Row(INDENT + LABEL_ID, String.valueOf(associationNodeOne.getFromGenObject().getId()), OBJECT));
-			rows.add(new Row(INDENT + LABEL_MNEMONIC,associationNodeOne.getFromGenObject().getObjMetaType().name(), OBJECT));
+			rows.add(new Row(INDENT + LABEL_MNEMONIC, associationNodeOne.getFromGenObject().getObjMetaType().name(),
+					OBJECT));
 			String name = associationNodeOne.getFromGenObject().findTextProperty(PrpMetaType.NAME);
 			if (name.length() > 0) {
 				rows.add(new Row(INDENT + LABEL_NAME, name, OBJECT));
 			}
-			rows.add(new Row(INDENT + LABEL_OBJECT_TYPE_CODE, String.valueOf(associationNodeOne.getFromGenObject().getObjMetaType().code), OBJECT));
+			rows.add(new Row(INDENT + LABEL_OBJECT_TYPE_CODE,
+					String.valueOf(associationNodeOne.getFromGenObject().getObjMetaType().code), OBJECT));
 			// association
 			rows.add(new Row(LABEL_ASSOCIATION, "", null));
 			rows.add(new Row(INDENT + LABEL_MNEMONIC, associationNodeOne.getAscMetaType().name(), image));
-			rows.add(new Row(INDENT + LABEL_ASSOCIATION_TYPE_CODE, String.valueOf(associationNodeOne.getAscMetaType().code), image));
-			rows.add(new Row(INDENT + LABEL_CARDINALITY, meta.isAssociationOnetoOne(objTypeCode, associationNodeOne.getAscMetaType()) ? "1" : "M", image));
- 			short inverseTypeCode = meta.getAssociationInverse(objTypeCode, associationNodeOne.getAscMetaType());
+			rows.add(new Row(INDENT + LABEL_ASSOCIATION_TYPE_CODE,
+					String.valueOf(associationNodeOne.getAscMetaType().code), image));
+			rows.add(new Row(INDENT + LABEL_CARDINALITY,
+					meta.isAssociationOnetoOne(objTypeCode, associationNodeOne.getAscMetaType()) ? "1" : "M", image));
+			short inverseTypeCode = meta.getAssociationInverse(objTypeCode, associationNodeOne.getAscMetaType());
 			rows.add(new Row(INDENT + LABEL_INVERSE_TYPE_MNEMONIC, meta.getAscMetaType(inverseTypeCode).name(), image));
- 			rows.add(new Row(INDENT + LABEL_INVERSE_TYPE_CODE,  String.valueOf(inverseTypeCode), image));
-			rows.add(new Row(INDENT + LABEL_OPTIONALITY, meta.isAssociationOptional(objTypeCode, associationNodeOne.getAscMetaType()) ? "O" : "M", image));
-			rows.add(new Row(INDENT + LABEL_ORDER, meta.isAssociationOrdered(objTypeCode, associationNodeOne.getAscMetaType()) ? "Y" : "N", image));
+			rows.add(new Row(INDENT + LABEL_INVERSE_TYPE_CODE, String.valueOf(inverseTypeCode), image));
+			rows.add(new Row(INDENT + LABEL_OPTIONALITY,
+					meta.isAssociationOptional(objTypeCode, associationNodeOne.getAscMetaType()) ? "O" : "M", image));
+			rows.add(new Row(INDENT + LABEL_ORDER,
+					meta.isAssociationOrdered(objTypeCode, associationNodeOne.getAscMetaType()) ? "Y" : "N", image));
 			// destination
 			rows.add(new Row(LABEL_DESTINATION_OBJECT, "", null));
 			rows.add(new Row(INDENT + LABEL_ID, String.valueOf(associationNodeOne.getToGenObject().getId()), OBJECT));
-			rows.add(new Row(INDENT + LABEL_MNEMONIC,associationNodeOne.getToGenObject().getObjMetaType().name(), OBJECT));
+			rows.add(new Row(INDENT + LABEL_MNEMONIC, associationNodeOne.getToGenObject().getObjMetaType().name(),
+					OBJECT));
 			name = associationNodeOne.getToGenObject().findTextProperty(PrpMetaType.NAME);
 			if (name.length() > 0) {
 				rows.add(new Row(INDENT + LABEL_NAME, name, OBJECT));
 			}
-			rows.add(new Row(INDENT + LABEL_OBJECT_TYPE_CODE, String.valueOf(associationNodeOne.getToGenObject().getObjMetaType().code), OBJECT));
+			rows.add(new Row(INDENT + LABEL_OBJECT_TYPE_CODE,
+					String.valueOf(associationNodeOne.getToGenObject().getObjMetaType().code), OBJECT));
 			//
 			tableViewer.setInput(rows);
 		}
 	}
-	
+
 	@Inject
 	void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) AssociationNodeMany associationNodeMany) {
 		if (associationNodeMany != null) {
 			Meta meta = associationNodeMany.getFromGenObject().genContainer.meta;
 			ObjMetaType objTypeCode = associationNodeMany.getFromGenObject().getObjMetaType();
-			Image image = meta.isAssociationForward(objTypeCode, associationNodeMany.getAscMetaType()) ? FORWARD : BACKWARD;
+			Image image = meta.isAssociationForward(objTypeCode, associationNodeMany.getAscMetaType()) ? FORWARD
+					: BACKWARD;
 			rows.clear();
 			rows.add(new Row(LABEL_SOURCE_OBJECT, "", null));
-			rows.add(new Row(INDENT + LABEL_ID, String.valueOf(associationNodeMany.getFromGenObject().getId()), OBJECT));
-			rows.add(new Row(INDENT + LABEL_MNEMONIC,
-					associationNodeMany.getFromGenObject().getObjMetaType().name(), OBJECT));
+			rows.add(
+					new Row(INDENT + LABEL_ID, String.valueOf(associationNodeMany.getFromGenObject().getId()), OBJECT));
+			rows.add(new Row(INDENT + LABEL_MNEMONIC, associationNodeMany.getFromGenObject().getObjMetaType().name(),
+					OBJECT));
 			String name = associationNodeMany.getFromGenObject().findTextProperty(PrpMetaType.NAME);
 			if (name.length() > 0) {
 				rows.add(new Row(INDENT + LABEL_NAME, name, OBJECT));
 			}
-			rows.add(new Row(INDENT + LABEL_OBJECT_TYPE_CODE, String.valueOf(associationNodeMany.getFromGenObject().getObjMetaType().code), OBJECT));
+			rows.add(new Row(INDENT + LABEL_OBJECT_TYPE_CODE,
+					String.valueOf(associationNodeMany.getFromGenObject().getObjMetaType().code), OBJECT));
 			// association
 			rows.add(new Row(LABEL_ASSOCIATION, "", null));
 			rows.add(new Row(INDENT + LABEL_MNEMONIC, associationNodeMany.getAscMetaType().name(), image));
-			rows.add(new Row(INDENT + LABEL_ASSOCIATION_TYPE_CODE, String.valueOf(associationNodeMany.getAscMetaType().code), image));
-			rows.add(new Row(INDENT + LABEL_CARDINALITY, meta.isAssociationOnetoOne(objTypeCode, associationNodeMany.getAscMetaType()) ? "1" : "M", image));
- 			short inverseTypeCode = meta.getAssociationInverse(objTypeCode, associationNodeMany.getAscMetaType());
+			rows.add(new Row(INDENT + LABEL_ASSOCIATION_TYPE_CODE,
+					String.valueOf(associationNodeMany.getAscMetaType().code), image));
+			rows.add(new Row(INDENT + LABEL_CARDINALITY,
+					meta.isAssociationOnetoOne(objTypeCode, associationNodeMany.getAscMetaType()) ? "1" : "M", image));
+			short inverseTypeCode = meta.getAssociationInverse(objTypeCode, associationNodeMany.getAscMetaType());
 			rows.add(new Row(INDENT + LABEL_INVERSE_TYPE_MNEMONIC, String.valueOf(inverseTypeCode), image));
- 			rows.add(new Row(INDENT + LABEL_INVERSE_TYPE_CODE,  String.valueOf(inverseTypeCode), image));
-			rows.add(new Row(INDENT + LABEL_OPTIONALITY, meta.isAssociationOptional(objTypeCode, associationNodeMany.getAscMetaType()) ? "O" : "M", image));
-			rows.add(new Row(INDENT + LABEL_ORDER, meta.isAssociationOrdered(objTypeCode, associationNodeMany.getAscMetaType()) ? "Y" : "N", image));
+			rows.add(new Row(INDENT + LABEL_INVERSE_TYPE_CODE, String.valueOf(inverseTypeCode), image));
+			rows.add(new Row(INDENT + LABEL_OPTIONALITY,
+					meta.isAssociationOptional(objTypeCode, associationNodeMany.getAscMetaType()) ? "O" : "M", image));
+			rows.add(new Row(INDENT + LABEL_ORDER,
+					meta.isAssociationOrdered(objTypeCode, associationNodeMany.getAscMetaType()) ? "Y" : "N", image));
 			// destination
 			rows.add(new Row(LABEL_DESTINATION_OBJECT, "[*]", null));
 
@@ -320,7 +335,7 @@ public class Properties {
 		List<PrpMetaType> list = meta.getPropertyCodes(genObject.getObjMetaType());
 		for (PrpMetaType prpTypeCode : list) {
 			switch (meta.getPropertyFormat(objTypeCode, prpTypeCode)) {
- 			case "ART":
+			case "ART":
 			case "TEXT":
 			case "LOADNAME":
 			case "NAME":
@@ -329,9 +344,9 @@ public class Properties {
 			case "CHAR":
 				addObjectCharacterProperies(genObject, prpTypeCode);
 				break;
- 			case "SINT":
+			case "SINT":
 			case "INT":
- 				addObjectNumberProperies(genObject, prpTypeCode);
+				addObjectNumberProperies(genObject, prpTypeCode);
 				break;
 			default:
 				break;

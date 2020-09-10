@@ -7,14 +7,14 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="eu.jgen.beegen.model.walker">
+            name="Bee Gen Model Walker">
          <property
                name="applicationCSS"
                value="platform:/plugin/eu.jgen.beegen.model.walker/css/default.css">
          </property>
          <property
                name="appName"
-               value="eu.jgen.beegen.model.walker">
+               value="Bee Gen Model Walker">
          </property>
       </product>
    </extension>
