@@ -33,7 +33,7 @@ import eu.jgen.beegen.model.api.JGenContainer;
 import eu.jgen.beegen.model.api.JGenModel;
 import eu.jgen.beegen.model.api.JGenObject;
 import eu.jgen.beegen.model.meta.AscMetaType;
-import eu.jgen.beegen.model.meta.Meta;
+import eu.jgen.beegen.model.meta.MetaHelper;
 import eu.jgen.beegen.model.meta.ObjMetaType;
 import eu.jgen.beegen.model.walker.parts.SelectAndExpand.StartingPoint;
 
@@ -41,7 +41,7 @@ public class WalkencyContentProvider implements IStructuredContentProvider, ITre
 
 	private JGenModel genModel;
 	private JGenContainer genContainer;
-	private Meta meta;
+	private MetaHelper meta;
 
 	public WalkencyContentProvider() {
 	}

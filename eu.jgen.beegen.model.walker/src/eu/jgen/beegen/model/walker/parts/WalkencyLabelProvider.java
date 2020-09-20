@@ -35,14 +35,14 @@ import org.osgi.framework.FrameworkUtil;
 import eu.jgen.beegen.model.api.JGenContainer;
 import eu.jgen.beegen.model.api.JGenModel;
 import eu.jgen.beegen.model.api.JGenObject;
-import eu.jgen.beegen.model.meta.Meta;
+import eu.jgen.beegen.model.meta.MetaHelper;
 import eu.jgen.beegen.model.meta.PrpMetaType;
 
 public class WalkencyLabelProvider extends LabelProvider {
 	
 	private JGenContainer genContainer;
 	private JGenModel genModel;
-	private Meta meta;
+	private MetaHelper meta;
 
 	private static final String MARKER_MANY = " [*]";
 	private final Image OBJECT = getImage("object.gif");

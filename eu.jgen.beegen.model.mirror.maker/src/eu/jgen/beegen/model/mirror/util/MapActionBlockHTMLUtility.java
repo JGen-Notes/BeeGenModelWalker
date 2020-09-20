@@ -67,7 +67,7 @@ public class MapActionBlockHTMLUtility {
 		
 		genContainer = new JGenContainer();
 		genModel = genContainer.connect(modelPath);
-		String nativeDir = genContainer.getModelLocation().substring(0, genContainer.getModelLocation().lastIndexOf(File.separator));
+		String nativeDir = genContainer.getContainerLocation().substring(0, genContainer.getContainerLocation().lastIndexOf(File.separator));
 		pathReportsDirectory = nativeDir + "/reports";
 		System.out.println(nativeDir);
 		createReportsFolder();		

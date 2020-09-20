@@ -56,7 +56,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
 import eu.jgen.beegen.model.api.JGenObject;
-import eu.jgen.beegen.model.meta.Meta;
+import eu.jgen.beegen.model.meta.MetaHelper;
 import eu.jgen.beegen.model.meta.ObjMetaType;
 import eu.jgen.beegen.model.meta.PrpMetaType;
 
@@ -242,7 +242,7 @@ public class Properties {
 	@Inject
 	void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) AssociationNodeOne associationNodeOne) {
 		if (associationNodeOne != null) {
-			Meta meta = associationNodeOne.getFromGenObject().genContainer.meta;
+			MetaHelper meta = associationNodeOne.getFromGenObject().genContainer.meta;
 			ObjMetaType objTypeCode = associationNodeOne.getFromGenObject().getObjMetaType();
 			Image image = meta.isAssociationForward(objTypeCode, associationNodeOne.getAscMetaType()) ? FORWARD
 					: BACKWARD;
@@ -291,7 +291,7 @@ public class Properties {
 	@Inject
 	void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) AssociationNodeMany associationNodeMany) {
 		if (associationNodeMany != null) {
-			Meta meta = associationNodeMany.getFromGenObject().genContainer.meta;
+			MetaHelper meta = associationNodeMany.getFromGenObject().genContainer.meta;
 			ObjMetaType objTypeCode = associationNodeMany.getFromGenObject().getObjMetaType();
 			Image image = meta.isAssociationForward(objTypeCode, associationNodeMany.getAscMetaType()) ? FORWARD
 					: BACKWARD;
@@ -329,7 +329,7 @@ public class Properties {
 	}
 
 	private void addObjectProperies(JGenObject genObject) {
-		Meta meta = genObject.genContainer.meta;
+		MetaHelper meta = genObject.genContainer.meta;
 		rows.add(new Row(LABEL_PROPERTIES, "", null));
 		ObjMetaType objTypeCode = genObject.getObjMetaType();
 		List<PrpMetaType> list = meta.getPropertyCodes(genObject.getObjMetaType());

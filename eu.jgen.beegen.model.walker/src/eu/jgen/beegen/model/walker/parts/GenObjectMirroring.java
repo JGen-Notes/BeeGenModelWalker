@@ -85,10 +85,10 @@ public class GenObjectMirroring {
 			return;
 		}
 		dir.mkdirs();
-	}
+	}  
 	
 	private void createReportFile(String name, String contents) {
-		String nativeDir = genContainer.getModelLocation().substring(0, genContainer.getModelLocation().lastIndexOf(File.separator));
+		String nativeDir = genContainer.getContainerLocation().substring(0, genContainer.getContainerLocation().lastIndexOf(File.separator));
 		pathReportsDirectory = nativeDir + "/reports";
 		createReportsFolder();
 		try {
