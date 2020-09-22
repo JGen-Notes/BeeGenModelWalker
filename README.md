@@ -40,5 +40,6 @@ On the pane below, you can see a special report showing the structure of the act
 
 ![](Walker-1024x919.png)
 
+The below snapshot shows a fragment of the model, as seen in the CA Gen Toolset, when developing an action block using an action block diagraming tool. 
 
 ![](personlist.png)
