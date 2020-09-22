@@ -7,7 +7,12 @@ Overview
 
 This is a research utility allowing connect to the Bee Gen Model and navigate thru the model.
 
-More about project you can find [here](http://www.jgen.eu/?p=900&preview=true).
+The CA Gen models are complicated and extensive. There are thousands of types of objects, properties, and associations. Even the medium size model can have hundreds of thousands or millions of objects. The Bee Gen Models inherit the entire complexity and size.
+
+Skills on navigating the vast population of objects and understanding the complexity of the associations between them are essential before any attempt to reuse such information by, for example, developing reports or writing generators or any similar projects.
+Walker is a tool helping in the process.
+
+More about this particular project you can find [here](http://www.jgen.eu/?p=900&preview=true).
 
 > The Bee Gen Model Framework is still under
 > development and subject to changes.
