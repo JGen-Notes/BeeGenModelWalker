@@ -27,7 +27,7 @@ Versions of used Software
 Example of use
 ==============
 
-Here is a snapshot of the screen of the Walker showing how the Walker does work. This example of how the screen looks when you open a model and select object type or object id. You can see a hierarchical view of the fragment starting from the PCROOT type of object. You can see that if you expand using forward association  HAACBLK, it returns several action blocks already defined in the model. You can expand further learning about the construction of the action block.
+Here is a snapshot of the screen of the Walker showing how the Walker does work. This example of how the screen looks when you open a model and select object type or object id. You can see a hierarchical view of the fragment starting, in this case, from the PCROOT type of object. You can see that if you expand using forward association  HAACBLK, it returns several action blocks already defined in the model. You can expand further learning about the construction of the action block.
 
 On the right side of the expansion tree, you can learn what properties have any highlighted object.
 
