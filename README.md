@@ -27,3 +27,4 @@ Versions of used Software
 Example of use
 ==============
 
+[![N|Solid](jgernnotes200x45.png)
