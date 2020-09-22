@@ -34,3 +34,6 @@ On the right side of the expansion tree, you can learn what properties have any 
 On the pane below, you can see a special report showing the structure of the action block. This report maps objects to the action block's statements whenever you select an action block object in the expansion tree. You see, below is the only report available at the current release, but more reports will be available in Walker's next releases.
 
 ![](Walker-1024x919.png)
+
+
+![](Walker-1024x919.png)
