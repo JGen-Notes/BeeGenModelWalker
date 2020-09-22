@@ -36,4 +36,4 @@ On the pane below, you can see a special report showing the structure of the act
 ![](Walker-1024x919.png)
 
 
-![](Walker-1024x919.png)
+![](personlist.png)
